@@ -4,6 +4,7 @@ var gulp   = require('gulp');
 var coffee = require('gulp-coffee');
 var filter = require('gulp-filter');
 var mocha  = require('gulp-mocha');
+var rename = require('gulp-rename');
 var gutil  = require('gulp-util');
 
 var src = ['*.coffee.md'];
@@ -20,6 +21,7 @@ gulp.task('default', function() {
   gulp.src(src)
     .pipe(outFilter)
     .pipe(coffee({bare: true}).on('error', gutil.log))
+    .pipe(rename('lenses.js'))
     .pipe(gulp.dest('.'))
     .pipe(outFilter.restore())
     .pipe(mocha({reporter: 'nyan'}))
