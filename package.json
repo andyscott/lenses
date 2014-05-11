@@ -1,0 +1,35 @@
+{
+  "name": "lense",
+  "version": "0.0.1",
+  "description": "Lenses for javascript",
+  "main": "lenses.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/andyscott/lenses"
+  },
+  "keywords": [
+    "functional",
+    "lense"
+  ],
+  "author": "Andy Scott (https://github.com/andyscott/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/andyscott/lenses/issues"
+  },
+  "homepage": "https://github.com/andyscott/lenses",
+  "devDependencies": {
+    "gulp": "~3.5.5",
+    "gulp-coffee": "~1.4.1",
+    "gulp-util": "~2.2.14",
+    "coffee-script": "^1.7.1",
+    "event-stream": "^3.1.0",
+    "gulp-mocha": "^0.4.1",
+    "gulp-filter": "^0.3.1",
+    "chai": "^1.9.0"
+  },
+  "dependencies": {
+  }
+}

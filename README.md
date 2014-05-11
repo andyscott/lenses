@@ -1,5 +1,7 @@
 Lenses for javascript.
 
+Minimal, and no external dependencies (except for building/testing).
+
 #Licensing
 See the [license](LICENSE.md) for licensing.
 
