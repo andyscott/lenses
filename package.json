@@ -1,6 +1,6 @@
 {
   "name": "lense",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Lenses for javascript",
   "main": "lenses.js",
   "scripts": {

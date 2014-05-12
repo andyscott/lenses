@@ -3,8 +3,38 @@ var IndexLenseNode, Lense, LenseNode, PathLenseNode,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
 Lense = (function() {
+  Lense.parse = function(pathString) {
+    var matches, path, r;
+    path = [];
+    r = /^(?:\.?(\w+)|\[(\d+)\])(.*)?$/;
+    while (true) {
+      matches = r.exec(pathString);
+      if (matches[1]) {
+        path.push(matches[1]);
+      } else if (matches[2]) {
+        path.push(parseInt(matches[2]));
+      }
+      pathString = matches[3];
+      if (!pathString) {
+        break;
+      }
+    }
+    return new Lense(path);
+  };
+
   function Lense(path) {
-    var convert, item;
+    var arg, convert, item;
+    if (arguments.length !== 1) {
+      path = (function() {
+        var _i, _len, _results;
+        _results = [];
+        for (_i = 0, _len = arguments.length; _i < _len; _i++) {
+          arg = arguments[_i];
+          _results.push(arg);
+        }
+        return _results;
+      }).apply(this, arguments);
+    }
     convert = function(node) {
       switch (typeof node) {
         case 'string':
@@ -25,17 +55,6 @@ Lense = (function() {
       return _results;
     })();
   }
-
-  Lense.prototype.render = function() {
-    var joined, part, path, _i, _len;
-    path = this.path.slice(0);
-    joined = path.splice(0, 1)[0].renderKey();
-    for (_i = 0, _len = path.length; _i < _len; _i++) {
-      part = path[_i];
-      joined = joined + part.renderSep() + part.renderKey();
-    }
-    return joined;
-  };
 
   Lense.prototype.get = function(o) {
     var part, _i, _len, _ref;
@@ -74,6 +93,17 @@ Lense = (function() {
       o = o2;
     }
     return this.path[this.path.length - 1].del(o);
+  };
+
+  Lense.prototype.render = function() {
+    var joined, part, path, _i, _len;
+    path = this.path.slice(0);
+    joined = path.splice(0, 1)[0].renderKey();
+    for (_i = 0, _len = path.length; _i < _len; _i++) {
+      part = path[_i];
+      joined = joined + part.renderSep() + part.renderKey();
+    }
+    return joined;
   };
 
   return Lense;

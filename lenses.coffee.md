@@ -14,12 +14,35 @@ and set the same path on mulitple different objects.
 
 ## Lense
 
-The constructor takes an array path. For example: `['a', 'b', 1, 'd']`
-would create a lense to get and set `obj.a.b[1].d`, where `obj` is the first
-parameter to the get and set methods.
-
     class Lense
+
+A lense can be created by calling `Lense.parse` with a dot notation string to
+describe the path.
+
+      @parse: (pathString) ->
+
+        path = []
+
+Parse will loop through the path string, finding path elements and pushing them
+into a new path array.
+
+        r = /^(?:\.?(\w+)|\[(\d+)\])(.*)?$/
+        loop
+          matches = r.exec pathString
+          if matches[1] then path.push matches[1]
+          else if matches[2] then path.push parseInt matches[2]
+          pathString = matches[3]
+          break unless pathString
+
+        new Lense path
+
+A lense can also be created more directly by using the contructor using an array
+path. For example: `['a', 'b', 1, 'd']` would create a lense to get and set
+`obj.a.b[1].d`, where `obj` is the first parameter to the get and set methods.
+
       constructor: (path) ->
+        if arguments.length isnt 1
+          path = (arg for arg in arguments)
 
 Internally the path is represented as Path and Index lense nodes. String means
 path lookup, number means index lookup.
@@ -33,16 +56,6 @@ path lookup, number means index lookup.
 Store the converted path.
 
         @path = (convert(item) for item in path)
-
-#### render
-Utility function to render the lense path as dot notation.
-
-      render: () ->
-        path = @path.slice 0
-        joined = path.splice(0, 1)[0].renderKey()
-        for part in path
-          joined = joined + part.renderSep() + part.renderKey()
-        joined
 
 #### get
 Get the value from object `o` at the lense path.
@@ -76,6 +89,16 @@ Delete the value on object `o` at the lense path.
           if not o2? || typeof o2 != 'object' then return
           o = o2
         @path[@path.length - 1].del o
+
+#### render
+Utility function to render the lense path as dot notation.
+
+      render: () ->
+        path = @path.slice 0
+        joined = path.splice(0, 1)[0].renderKey()
+        for part in path
+          joined = joined + part.renderSep() + part.renderKey()
+        joined
 
 ## Lense Nodes
 These are used internally. However, you can pass them directly to the `Lense`
