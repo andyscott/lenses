@@ -9,7 +9,7 @@ A half assed implementation of lenses... in Coffeescript.
 
 Lenses consist of a getter and setter method. The getter (`get`) and setter
 (`set`) are performed to a specific path. A single lense can get
-and set the same path on mulitple different objects.  
+and set the same path on mulitple different objects.
 
 
 ## Lense
@@ -26,7 +26,7 @@ describe the path.
 Parse will loop through the path string, finding path elements and pushing them
 into a new path array.
 
-        r = /^(?:\.?(\w+)|\[(\d+)\])(.*)?$/
+        r = /^(?:\.?([\w_-]+)|\[(\d+)\])(.*)?$/
         loop
           matches = r.exec pathString
           if matches[1] then path.push matches[1]
@@ -102,7 +102,7 @@ Utility function to render the lense path as dot notation.
 
 ## Lense Nodes
 These are used internally. However, you can pass them directly to the `Lense`
-constructor instead of strings and numbers if you want.  
+constructor instead of strings and numbers if you want.
 
 A general lense path node with a key value.
 

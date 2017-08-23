@@ -6,7 +6,7 @@ Lense = (function() {
   Lense.parse = function(pathString) {
     var matches, path, r;
     path = [];
-    r = /^(?:\.?(\w+)|\[(\d+)\])(.*)?$/;
+    r = /^(?:\.?([\w_-]+)|\[(\d+)\])(.*)?$/;
     while (true) {
       matches = r.exec(pathString);
       if (matches[1]) {

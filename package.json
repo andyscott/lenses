@@ -21,15 +21,15 @@
   },
   "homepage": "https://github.com/andyscott/lenses",
   "devDependencies": {
-    "gulp": "~3.5.5",
-    "gulp-coffee": "~1.4.1",
-    "gulp-util": "~2.2.14",
+    "chai": "^1.9.0",
     "coffee-script": "^1.7.1",
     "event-stream": "^3.1.0",
-    "gulp-mocha": "^0.4.1",
+    "gulp": "^3.9.1",
+    "gulp-coffee": "^1.4.3",
     "gulp-filter": "^0.3.1",
-    "chai": "^1.9.0",
-    "gulp-rename": "^1.2.0"
+    "gulp-mocha": "^0.4.1",
+    "gulp-rename": "^1.2.0",
+    "gulp-util": "~2.2.14"
   },
   "dependencies": {}
 }

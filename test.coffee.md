@@ -9,7 +9,7 @@
     {Lense, IndexLenseNode, PathLenseNode} = require './lenses'
 
     describe 'lense creation', ->
-      
+
       it 'should take an array', ->
         lense = new Lense ['a', 'b', 'c']
         lense.path.should.have.length 3
@@ -61,6 +61,19 @@
 
         lense.path[2].should.be.an.instanceof IndexLenseNode
         lense.path[2].key.should.equal 4000
+
+      it 'should parse paths with dashes', ->
+
+        lense = Lense.parse 'foo.bar.foo-bar'
+
+        lense.path[0].should.be.an.instanceof PathLenseNode
+        lense.path[0].key.should.equal 'foo'
+
+        lense.path[1].should.be.an.instanceof PathLenseNode
+        lense.path[1].key.should.equal 'bar'
+
+        lense.path[2].should.be.an.instanceof PathLenseNode
+        lense.path[2].key.should.equal 'foo-bar'
 
     describe 'rendering a lense path', ->
 
